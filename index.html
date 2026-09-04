@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil | Ach. Sufyan Wahyudi</title>
     
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts: Playfair Display (Nama) & Plus Jakarta Sans (Teks) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -156,19 +154,24 @@
             line-height: 1.4;
         }
 
+        /* Class untuk menjaga nama tetap sejajar (tidak terpotong ke bawah) */
+        .main-name {
+            white-space: nowrap;
+        }
+
         .degree-break {
             display: inline;
         }
 
         /* FONT TITLE/SUBTITLE YANG SEJAJAR DI SEMUA MODE */
         .subtitle {
-            font-size: clamp(10px, 2.5vw, 15px); /* Skala font otomatis mengikuti layar */
+            font-size: clamp(10px, 2.5vw, 15px); 
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-muted);
             margin-bottom: 30px;
-            white-space: nowrap; /* Memaksa teks tetap dalam satu baris lurus menyamping */
+            white-space: nowrap; 
         }
 
         /* --- Copywriting --- */
@@ -309,17 +312,19 @@
             transform: rotate(15deg) scale(1.1);
         }
 
-        /* Responsif untuk HP */
+        /* Responsif untuk HP (Ukuran diatur lebih detail agar muat) */
         @media (max-width: 600px) {
-            .glass-container { padding: 40px 20px; }
-            .name-bubble { padding: 15px 20px; }
+            .glass-container { padding: 40px 15px; }
+            .name-bubble { padding: 15px; width: 100%; box-sizing: border-box; }
             
-            h1 { font-size: 20px; }
+            /* Mengecilkan font nama secara otomatis agar tidak patah */
+            h1 { font-size: clamp(14px, 4.5vw, 20px); }
 
+            /* Gelar turun sejajar persis di bawah nama */
             .degree-break {
                 display: block;
                 margin-top: 5px;
-                font-size: 16px;
+                font-size: clamp(11px, 3.5vw, 15px);
                 color: var(--text-muted); 
             }
 
@@ -345,10 +350,9 @@
     <main class="glass-container">
         
         <div class="name-bubble">
-            <h1>ACH. SUFYAN WAHYUDI, <span class="degree-break">S.Pd., M.Pd., C.Ed.</span></h1>
+            <h1><span class="main-name">ACH. SUFYAN WAHYUDI,</span> <span class="degree-break">S.Pd., M.Pd., C.Ed.</span></h1>
         </div>
         
-        <!-- Teks akan selalu sejajar berkat nowrap dan clamp() -->
         <h2 class="subtitle">Pakar Pendidikan | CEO | Penulis</h2>
 
         <p class="bio">
@@ -369,7 +373,7 @@
             <div class="glass-card">
                 <i class="fas fa-building"></i>
                 <h3>Founder & CEO</h3>
-                <p>Memimpin inovasi di PT Media Tulisan Manusia.</p>
+                <p>PT Media Tulisan Manusia.</p>
             </div>
         </div>
 
