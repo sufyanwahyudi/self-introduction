@@ -142,19 +142,19 @@
             transform: scale(1.05);
         }
 
-        /* FONT NAMA (Desktop/Tablet) */
+        /* FONT NAMA (Desktop Penuh) */
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(18px, 2.5vw, 32px); 
+            font-size: clamp(20px, 2.5vw, 32px); 
             font-weight: 700;
             font-style: italic;
             letter-spacing: 2px; 
             color: var(--text-main);
             text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
             line-height: 1.4;
+            white-space: nowrap; /* Memaksa satu baris untuk Desktop & Tablet */
         }
 
-        /* Class untuk menjaga nama tetap sejajar (tidak terpotong ke bawah) */
         .main-name {
             white-space: nowrap;
         }
@@ -312,15 +312,22 @@
             transform: rotate(15deg) scale(1.1);
         }
 
-        /* Responsif untuk HP (Ukuran diatur lebih detail agar muat) */
+        /* Responsif untuk Tablet (Ukuran disesuaikan agar muat 1 baris) */
+        @media (max-width: 1024px) {
+            h1 { font-size: clamp(14px, 2.2vw, 22px); }
+            .name-bubble { padding: 18px 25px; }
+        }
+
+        /* Responsif untuk HP (Gelar turun ke bawah, nama tetap 1 baris) */
         @media (max-width: 600px) {
             .glass-container { padding: 40px 15px; }
             .name-bubble { padding: 15px; width: 100%; box-sizing: border-box; }
             
-            /* Mengecilkan font nama secara otomatis agar tidak patah */
-            h1 { font-size: clamp(14px, 4.5vw, 20px); }
+            h1 { 
+                font-size: clamp(14px, 4.5vw, 20px); 
+                white-space: normal; /* Lepas paksaan 1 baris untuk seluruh h1, agar gelar bisa turun */
+            }
 
-            /* Gelar turun sejajar persis di bawah nama */
             .degree-break {
                 display: block;
                 margin-top: 5px;
