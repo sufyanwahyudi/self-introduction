@@ -249,18 +249,17 @@
             line-height: 1.5;
         }
 
-        /* --- Tombol Resume & Portofolio (Kecil, Teks Saja, Bersampingan) --- */
+        /* --- Tombol Resume (Kecil, Teks Saja) --- */
         .pdf-links-container {
             display: flex;
             justify-content: center;
-            gap: 12px;
             margin-bottom: 30px;
         }
 
         .pdf-badge {
             background: var(--bubble-bg);
             border: 1px solid var(--glass-border);
-            padding: 8px 22px;
+            padding: 8px 28px;
             border-radius: 20px;
             color: var(--text-main);
             text-decoration: none;
@@ -538,10 +537,9 @@
             </div>
         </div>
 
-        <!-- Tombol Resume & Portofolio -->
+        <!-- Tombol Resume Saja -->
         <div class="pdf-links-container">
             <button class="pdf-badge" onclick="openPasswordModal('v1resume.pdf', 'Resume')">Resume</button>
-            <button class="pdf-badge" onclick="openPasswordModal('v2portofolio.pdf', 'Portofolio')">Portofolio</button>
         </div>
 
         <a href="http://mediatulisanmanusia.online/" class="btn-cta" target="_blank">
@@ -617,7 +615,7 @@
             if (password === 'satuduatiga') {
                 modal.classList.remove('active');
                 
-                // Membuka PDF menggunakan Google Docs Viewer agar langsung tampil (preview) tanpa mendownload otomatis
+                // Membuka PDF menggunakan Google Docs Viewer agar langsung tampil (preview)
                 const absolutePdfUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + targetPdfUrl;
                 const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(absolutePdfUrl)}&embedded=false`;
                 
