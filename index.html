@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil | Ach. Sufyan Wahyudi, S.Pd., M.Pd., C.Ed.</title>
+    <title>Profil | Ach. Sufyan Wahyudi</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -25,7 +25,7 @@
             --card-hover: rgba(50, 50, 50, 0.6);
             --accent-color: #ffffff;
             --btn-text-color: #000000;
-            --floating-bubble-color: rgba(255, 255, 255, 0.05);
+            --floating-bubble-color: rgba(255, 255, 255, 0.08);
         }
 
         /* TEMA GELAP (Toggled) -> Gradasi Putih/Terang (Sebaliknya) */
@@ -41,7 +41,7 @@
             --card-hover: rgba(255, 255, 255, 0.9);
             --accent-color: #000000;
             --btn-text-color: #ffffff;
-            --floating-bubble-color: rgba(0, 0, 0, 0.05);
+            --floating-bubble-color: rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -60,7 +60,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px 100px 20px;
+            padding: 40px 20px 120px 20px;
             transition: all 0.6s ease;
             overflow-x: hidden;
             position: relative;
@@ -72,7 +72,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- ANIMASI GELEMBUNG LATAR BELAKANG --- */
+        /* --- ANIMASI GELEMBUNG LATAR BELAKANG YANG HIDUP --- */
         .bubbles-container {
             position: fixed;
             top: 0;
@@ -86,27 +86,44 @@
 
         .bubble {
             position: absolute;
-            bottom: -100px;
+            bottom: -120px;
             background: var(--floating-bubble-color);
             border: 1px solid var(--glass-border);
             border-radius: 50%;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
-            backdrop-filter: blur(3px);
-            animation: floatUp linear infinite;
+            box-shadow: inset 0 0 15px rgba(255,255,255,0.2), 0 0 10px rgba(255,255,255,0.05);
+            backdrop-filter: blur(4px);
+            animation: floatUpAndWobble linear infinite;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+        @keyframes floatUpAndWobble {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.4);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-60vh) translateX(30px) scale(1);
+                opacity: 0.6;
+            }
+            80% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(-30px) scale(1.3);
+                opacity: 0;
+            }
         }
 
-        .bubble:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-duration: 12s; animation-delay: 0s; }
-        .bubble:nth-child(2) { width: 40px; height: 40px; left: 20%; animation-duration: 8s; animation-delay: 2s; }
-        .bubble:nth-child(3) { width: 100px; height: 100px; left: 35%; animation-duration: 15s; animation-delay: 4s; }
-        .bubble:nth-child(4) { width: 60px; height: 60px; left: 50%; animation-duration: 10s; animation-delay: 1s; }
-        .bubble:nth-child(5) { width: 90px; height: 90px; left: 70%; animation-duration: 14s; animation-delay: 3s; }
-        .bubble:nth-child(6) { width: 50px; height: 50px; left: 85%; animation-duration: 9s; animation-delay: 5s; }
+        .bubble:nth-child(1) { width: 90px; height: 90px; left: 8%; animation-duration: 10s; animation-delay: 0s; }
+        .bubble:nth-child(2) { width: 45px; height: 45px; left: 18%; animation-duration: 7s; animation-delay: 1.5s; }
+        .bubble:nth-child(3) { width: 110px; height: 110px; left: 30%; animation-duration: 13s; animation-delay: 3s; }
+        .bubble:nth-child(4) { width: 65px; height: 65px; left: 45%; animation-duration: 8s; animation-delay: 0.5s; }
+        .bubble:nth-child(5) { width: 40px; height: 40px; left: 58%; animation-duration: 6s; animation-delay: 2s; }
+        .bubble:nth-child(6) { width: 100px; height: 100px; left: 72%; animation-duration: 11s; animation-delay: 4s; }
+        .bubble:nth-child(7) { width: 55px; height: 55px; left: 85%; animation-duration: 9s; animation-delay: 1s; }
+        .bubble:nth-child(8) { width: 75px; height: 75px; left: 92%; animation-duration: 12s; animation-delay: 2.5s; }
 
         /* --- Kontainer Utama (Kaca) --- */
         .glass-container {
@@ -142,7 +159,6 @@
             transform: scale(1.05);
         }
 
-        /* FONT NAMA (Desktop Penuh) */
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(20px, 2.5vw, 32px); 
@@ -152,7 +168,7 @@
             color: var(--text-main);
             text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
             line-height: 1.4;
-            white-space: nowrap; /* Memaksa satu baris untuk Desktop & Tablet */
+            white-space: nowrap;
         }
 
         .main-name {
@@ -163,7 +179,6 @@
             display: inline;
         }
 
-        /* FONT TITLE/SUBTITLE YANG SEJAJAR DI SEMUA MODE */
         .subtitle {
             font-size: clamp(10px, 2.5vw, 15px); 
             font-weight: 700;
@@ -195,7 +210,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         .glass-card {
@@ -234,6 +249,35 @@
             line-height: 1.5;
         }
 
+        /* --- Tombol Resume & Portofolio (Kecil, Teks Saja, Bersampingan) --- */
+        .pdf-links-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .pdf-badge {
+            background: var(--bubble-bg);
+            border: 1px solid var(--glass-border);
+            padding: 8px 22px;
+            border-radius: 20px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: var(--bubble-shadow);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pdf-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: var(--accent-color);
+            color: var(--btn-text-color);
+        }
+
         /* --- Tombol Aksi Utama --- */
         .btn-cta {
             background: var(--accent-color);
@@ -254,7 +298,115 @@
             transform: translateY(-3px) scale(1.05);
         }
 
-        /* --- Social Media Bubbles --- */
+        /* --- Modal Kata Sandi --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-box h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .modal-box p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 14px;
+            text-align: center;
+            outline: none;
+            margin-bottom: 15px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .modal-input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn.submit {
+            background: var(--accent-color);
+            color: var(--btn-text-color);
+        }
+
+        .modal-btn.cancel {
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.03);
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        /* --- Social Media Bubbles (Di Bawah) --- */
         .floating-social {
             position: fixed;
             bottom: 25px;
@@ -264,8 +416,8 @@
         }
 
         .social-bubble {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: var(--bubble-bg);
             border: 1px solid var(--glass-border);
@@ -274,14 +426,14 @@
             align-items: center;
             text-decoration: none;
             color: var(--text-main);
-            font-size: 22px;
+            font-size: 20px;
             box-shadow: var(--bubble-shadow);
             backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .social-bubble:hover {
-            transform: translateY(-10px) scale(1.1);
+            transform: translateY(-8px) scale(1.1);
             background: var(--accent-color);
             color: var(--btn-text-color);
         }
@@ -312,20 +464,20 @@
             transform: rotate(15deg) scale(1.1);
         }
 
-        /* Responsif untuk Tablet (Ukuran disesuaikan agar muat 1 baris) */
+        /* Responsif untuk Tablet */
         @media (max-width: 1024px) {
             h1 { font-size: clamp(14px, 2.2vw, 22px); }
             .name-bubble { padding: 18px 25px; }
         }
 
-        /* Responsif untuk HP (Gelar turun ke bawah, nama tetap 1 baris) */
+        /* Responsif untuk HP */
         @media (max-width: 600px) {
             .glass-container { padding: 40px 15px; }
             .name-bubble { padding: 15px; width: 100%; box-sizing: border-box; }
             
             h1 { 
                 font-size: clamp(14px, 4.5vw, 20px); 
-                white-space: normal; /* Lepas paksaan 1 baris untuk seluruh h1, agar gelar bisa turun */
+                white-space: normal; 
             }
 
             .degree-break {
@@ -342,6 +494,8 @@
 <body>
 
     <div class="bubbles-container">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
         <div class="bubble"></div>
         <div class="bubble"></div>
         <div class="bubble"></div>
@@ -370,18 +524,24 @@
             <div class="glass-card">
                 <i class="fas fa-graduation-cap"></i>
                 <h3>Akademisi</h3>
-                <p>Alumni S1 UNIKAMA | S2 UM.</p>
+                <p>Alumni S1 UNIKAMA & S2 UM.</p>
             </div>
             <div class="glass-card">
                 <i class="fas fa-book-open"></i>
                 <h3>Penulis Novel</h3>
-                <p>Tanpamu | Lebih dari Seharusnya | Bukan Tentang Hari Ini.</p>
+                <p>Tanpamu, Lebih dari Seharusnya, Bukan Tentang Hari Ini.</p>
             </div>
             <div class="glass-card">
                 <i class="fas fa-building"></i>
                 <h3>Founder & CEO</h3>
-                <p>PT Media Tulisan Manusia.</p>
+                <p>Memimpin inovasi di PT Media Tulisan Manusia.</p>
             </div>
+        </div>
+
+        <!-- Tombol Resume & Portofolio Kecil, Bersampingan di Bawah Kartu -->
+        <div class="pdf-links-container">
+            <button class="pdf-badge" onclick="openPasswordModal('./v1resume.pdf', 'Resume')">Resume</button>
+            <button class="pdf-badge" onclick="openPasswordModal('./v2portofolio.pdf', 'Portofolio')">Portofolio</button>
         </div>
 
         <a href="http://mediatulisanmanusia.online/" class="btn-cta" target="_blank">
@@ -389,6 +549,20 @@
         </a>
 
     </main>
+
+    <!-- Modal Input Kata Sandi -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal-box">
+            <h3 id="modalTitle">Masukkan Kata Sandi</h3>
+            <p>Dokumen ini dilindungi sandi. Masukkan kata sandi untuk melanjutkan.</p>
+            <input type="password" id="passwordInput" class="modal-input" placeholder="Kata sandi..." onkeypress="handleKeyPress(event)">
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closePasswordModal()">Batal</button>
+                <button class="modal-btn submit" onclick="verifyPassword()">Buka</button>
+            </div>
+            <div class="error-msg" id="errorMsg">Kata sandi salah!</div>
+        </div>
+    </div>
 
     <div class="floating-social">
         <a href="https://instagram.com/sufyanwahyudi" class="social-bubble" aria-label="Instagram Pribadi" target="_blank">
@@ -403,6 +577,7 @@
     </div>
 
     <script>
+        // Logika Toggle Tema
         const themeBtn = document.getElementById('themeBtn');
         const themeIcon = document.getElementById('themeIcon');
         
@@ -415,6 +590,44 @@
                 themeIcon.classList.replace('fa-sun', 'fa-moon');
             }
         });
+
+        // Logika Proteksi Kata Sandi PDF
+        let targetPdfUrl = '';
+        const modal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const errorMsg = document.getElementById('errorMsg');
+        const modalTitle = document.getElementById('modalTitle');
+
+        function openPasswordModal(pdfUrl, docName) {
+            targetPdfUrl = pdfUrl;
+            modalTitle.innerText = `Akses ${docName}`;
+            passwordInput.value = '';
+            errorMsg.style.display = 'none';
+            modal.classList.add('active');
+            passwordInput.focus();
+        }
+
+        function closePasswordModal() {
+            modal.classList.remove('active');
+            targetPdfUrl = '';
+        }
+
+        function verifyPassword() {
+            const password = passwordInput.value;
+            if (password === 'satuduatiga') {
+                modal.classList.remove('active');
+                window.open(targetPdfUrl, '_blank');
+            } else {
+                errorMsg.style.display = 'block';
+                passwordInput.style.borderColor = '#ff6b6b';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                verifyPassword();
+            }
+        }
     </script>
 </body>
 </html>
