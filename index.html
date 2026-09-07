@@ -538,10 +538,10 @@
             </div>
         </div>
 
-        <!-- Tombol Resume & Portofolio Kecil, Bersampingan di Bawah Kartu -->
+        <!-- Tombol Resume & Portofolio -->
         <div class="pdf-links-container">
-            <button class="pdf-badge" onclick="openPasswordModal('./v1resume.pdf', 'Resume')">Resume</button>
-            <button class="pdf-badge" onclick="openPasswordModal('./v2portofolio.pdf', 'Portofolio')">Portofolio</button>
+            <button class="pdf-badge" onclick="openPasswordModal('v1resume.pdf', 'Resume')">Resume</button>
+            <button class="pdf-badge" onclick="openPasswordModal('v2portofolio.pdf', 'Portofolio')">Portofolio</button>
         </div>
 
         <a href="http://mediatulisanmanusia.online/" class="btn-cta" target="_blank">
@@ -616,7 +616,12 @@
             const password = passwordInput.value;
             if (password === 'satuduatiga') {
                 modal.classList.remove('active');
-                window.open(targetPdfUrl, '_blank');
+                
+                // Membuka PDF menggunakan Google Docs Viewer agar langsung tampil (preview) tanpa mendownload otomatis
+                const absolutePdfUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + targetPdfUrl;
+                const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(absolutePdfUrl)}&embedded=false`;
+                
+                window.open(viewerUrl, '_blank');
             } else {
                 errorMsg.style.display = 'block';
                 passwordInput.style.borderColor = '#ff6b6b';
