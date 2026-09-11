@@ -15,24 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* TEMA TERANG (Default) -> Gradasi Hitam Elegan */
+        /* TEMA TERANG (Default) */
         :root {
-            --bg-color-1: #000000;
-            --bg-color-2: #2b2b2b;
-            --glass-bg: rgba(20, 20, 20, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --bubble-bg: linear-gradient(135deg, rgba(60, 60, 60, 0.8), rgba(10, 10, 10, 0.3));
-            --bubble-shadow: inset 0px 4px 10px rgba(255, 255, 255, 0.2), 0 15px 30px rgba(0, 0, 0, 0.8);
-            --text-main: #ffffff;
-            --text-muted: #cccccc;
-            --card-hover: rgba(50, 50, 50, 0.6);
-            --accent-color: #ffffff;
-            --btn-text-color: #000000;
-            --floating-bubble-color: rgba(255, 255, 255, 0.08);
-        }
-
-        /* TEMA GELAP (Toggled) -> Gradasi Putih/Terang (Sebaliknya) */
-        [data-theme="dark"] {
             --bg-color-1: #fdfbfb;
             --bg-color-2: #ebedee;
             --glass-bg: rgba(255, 255, 255, 0.4);
@@ -45,6 +29,22 @@
             --accent-color: #000000;
             --btn-text-color: #ffffff;
             --floating-bubble-color: rgba(0, 0, 0, 0.08);
+        }
+
+        /* TEMA GELAP (Toggled) */
+        [data-theme="dark"] {
+            --bg-color-1: #000000;
+            --bg-color-2: #2b2b2b;
+            --glass-bg: rgba(20, 20, 20, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --bubble-bg: linear-gradient(135deg, rgba(60, 60, 60, 0.8), rgba(10, 10, 10, 0.3));
+            --bubble-shadow: inset 0px 4px 10px rgba(255, 255, 255, 0.2), 0 15px 30px rgba(0, 0, 0, 0.8);
+            --text-main: #ffffff;
+            --text-muted: #cccccc;
+            --card-hover: rgba(50, 50, 50, 0.6);
+            --accent-color: #ffffff;
+            --btn-text-color: #000000;
+            --floating-bubble-color: rgba(255, 255, 255, 0.08);
         }
 
         * {
@@ -75,7 +75,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- ANIMASI GELEMBUNG LATAR BELAKANG YANG HIDUP --- */
+        /* --- ANIMASI GELEMBUNG LATAR BELAKANG --- */
         .bubbles-container {
             position: fixed;
             top: 0;
@@ -99,24 +99,11 @@
         }
 
         @keyframes floatUpAndWobble {
-            0% {
-                transform: translateY(0) translateX(0) scale(0.4);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            50% {
-                transform: translateY(-60vh) translateX(30px) scale(1);
-                opacity: 0.6;
-            }
-            80% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-120vh) translateX(-30px) scale(1.3);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) translateX(0) scale(0.4); opacity: 0; }
+            20% { opacity: 0.8; }
+            50% { transform: translateY(-60vh) translateX(30px) scale(1); opacity: 0.6; }
+            80% { opacity: 0.4; }
+            100% { transform: translateY(-120vh) translateX(-30px) scale(1.3); opacity: 0; }
         }
 
         .bubble:nth-child(1) { width: 90px; height: 90px; left: 8%; animation-duration: 10s; animation-delay: 0s; }
@@ -144,7 +131,7 @@
             z-index: 1;
         }
 
-        /* --- Gelembung Nama (Crystal Bubble) --- */
+        /* --- Gelembung Nama --- */
         .name-bubble {
             background: var(--bubble-bg);
             border: 1px solid var(--glass-border);
@@ -174,13 +161,8 @@
             white-space: nowrap;
         }
 
-        .main-name {
-            white-space: nowrap;
-        }
-
-        .degree-break {
-            display: inline;
-        }
+        .main-name { white-space: nowrap; }
+        .degree-break { display: inline; }
 
         .subtitle {
             font-size: clamp(10px, 2.5vw, 15px); 
@@ -236,27 +218,15 @@
             border-color: var(--accent-color);
         }
 
-        .glass-card i {
-            font-size: 28px;
-            color: var(--text-main);
-        }
+        .glass-card i { font-size: 28px; color: var(--text-main); }
+        .glass-card h3 { font-size: 15px; font-weight: 700; }
+        .glass-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-        .glass-card h3 {
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .glass-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* --- Tombol Resume (Kecil, Teks Saja) --- */
+        /* --- Tombol Resume (Paling Kecil) --- */
         .pdf-links-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 15px; /* Jarak dirapatkan sedikit */
         }
 
         .pdf-badge {
@@ -280,7 +250,34 @@
             color: var(--btn-text-color);
         }
 
-        /* --- Tombol Aksi Utama --- */
+        /* --- Tombol ID CARD (Sedang) --- */
+        .id-card-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .id-card-badge {
+            background: var(--bubble-bg);
+            border: 1px solid var(--glass-border);
+            padding: 11px 32px; /* Ukuran tengah (lebih besar dari resume) */
+            border-radius: 25px; /* Tetap berbentuk gelembung */
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px; /* Ukuran teks tengah */
+            font-weight: 700;
+            box-shadow: var(--bubble-shadow);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .id-card-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: var(--accent-color);
+            color: var(--btn-text-color);
+        }
+
+        /* --- Tombol Aksi Utama (Paling Besar) --- */
         .btn-cta {
             background: var(--accent-color);
             color: var(--btn-text-color);
@@ -303,33 +300,22 @@
         /* --- Modal Kata Sandi --- */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
+            opacity: 0; visibility: hidden;
             transition: all 0.3s ease;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
 
         .modal-box {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 380px;
+            padding: 30px; border-radius: 25px;
+            width: 90%; max-width: 380px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             backdrop-filter: blur(20px);
@@ -337,158 +323,75 @@
             transition: transform 0.3s ease;
         }
 
-        .modal-overlay.active .modal-box {
-            transform: scale(1);
-        }
-
-        .modal-box h3 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
-
-        .modal-box p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
+        .modal-overlay.active .modal-box { transform: scale(1); }
+        .modal-box h3 { font-size: 18px; margin-bottom: 12px; color: var(--text-main); }
+        .modal-box p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
 
         .modal-input {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 15px;
+            width: 100%; padding: 12px 15px; border-radius: 15px;
             border: 1px solid var(--glass-border);
             background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            font-size: 14px;
-            text-align: center;
-            outline: none;
-            margin-bottom: 15px;
+            color: var(--text-main); font-size: 14px;
+            text-align: center; outline: none; margin-bottom: 15px;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .modal-input:focus {
-            border-color: var(--accent-color);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-        }
+        .modal-input:focus { border-color: var(--accent-color); }
+        .modal-buttons { display: flex; gap: 10px; }
 
         .modal-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 15px;
+            flex: 1; padding: 10px; border-radius: 15px;
             border: 1px solid var(--glass-border);
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s ease;
         }
 
-        .modal-btn.submit {
-            background: var(--accent-color);
-            color: var(--btn-text-color);
-        }
+        .modal-btn.submit { background: var(--accent-color); color: var(--btn-text-color); }
+        .modal-btn.cancel { background: transparent; color: var(--text-main); }
+        .modal-btn:hover { transform: scale(1.03); }
+        .error-msg { color: #ff6b6b; font-size: 12px; margin-top: 8px; display: none; }
 
-        .modal-btn.cancel {
-            background: transparent;
-            color: var(--text-main);
-        }
-
-        .modal-btn:hover {
-            transform: scale(1.03);
-        }
-
-        .error-msg {
-            color: #ff6b6b;
-            font-size: 12px;
-            margin-top: 8px;
-            display: none;
-        }
-
-        /* --- Social Media Bubbles (Di Bawah) --- */
+        /* --- Social Media Bubbles --- */
         .floating-social {
-            position: fixed;
-            bottom: 25px;
-            display: flex;
-            gap: 15px;
-            z-index: 100;
+            position: fixed; bottom: 25px; display: flex; gap: 15px; z-index: 100;
         }
 
         .social-bubble {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bubble-bg);
-            border: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 20px;
-            box-shadow: var(--bubble-shadow);
-            backdrop-filter: blur(10px);
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--bubble-bg); border: 1px solid var(--glass-border);
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; color: var(--text-main); font-size: 20px;
+            box-shadow: var(--bubble-shadow); backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .social-bubble:hover {
             transform: translateY(-8px) scale(1.1);
-            background: var(--accent-color);
-            color: var(--btn-text-color);
+            background: var(--accent-color); color: var(--btn-text-color);
         }
 
         /* --- Toggle Tema --- */
         .theme-toggle {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bubble-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
-            box-shadow: var(--bubble-shadow);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.4s ease;
+            position: fixed; top: 25px; right: 25px; width: 50px; height: 50px;
+            border-radius: 50%; background: var(--bubble-bg);
+            border: 1px solid var(--glass-border); color: var(--text-main);
+            box-shadow: var(--bubble-shadow); backdrop-filter: blur(10px);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 20px; cursor: pointer; z-index: 100; transition: all 0.4s ease;
         }
 
-        .theme-toggle:hover {
-            transform: rotate(15deg) scale(1.1);
-        }
+        .theme-toggle:hover { transform: rotate(15deg) scale(1.1); }
 
-        /* Responsif untuk Tablet */
+        /* Responsif */
         @media (max-width: 1024px) {
             h1 { font-size: clamp(14px, 2.2vw, 22px); }
             .name-bubble { padding: 18px 25px; }
         }
 
-        /* Responsif untuk HP */
         @media (max-width: 600px) {
             .glass-container { padding: 40px 15px; }
             .name-bubble { padding: 15px; width: 100%; box-sizing: border-box; }
-            
-            h1 { 
-                font-size: clamp(14px, 4.5vw, 20px); 
-                white-space: normal; 
-            }
-
-            .degree-break {
-                display: block;
-                margin-top: 5px;
-                font-size: clamp(11px, 3.5vw, 15px);
-                color: var(--text-muted); 
-            }
-
+            h1 { font-size: clamp(14px, 4.5vw, 20px); white-space: normal; }
+            .degree-break { display: block; margin-top: 5px; font-size: clamp(11px, 3.5vw, 15px); color: var(--text-muted); }
             .theme-toggle { top: 15px; right: 15px; width: 45px; height: 45px; }
         }
     </style>
@@ -496,18 +399,14 @@
 <body>
 
     <div class="bubbles-container">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div>
     </div>
 
+    <!-- Ikon diubah menjadi bulan sebagai awal (menunjukkan mode terang sedang aktif) -->
     <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-        <i class="fas fa-sun" id="themeIcon"></i>
+        <i class="fas fa-moon" id="themeIcon"></i>
     </button>
 
     <main class="glass-container">
@@ -540,11 +439,19 @@
             </div>
         </div>
 
-        <!-- Tombol Resume Saja -->
+        <!-- Tombol Resume (Terkecil) -->
         <div class="pdf-links-container">
             <button class="pdf-badge" onclick="openPasswordModal('v1resume.pdf', 'Resume')">Resume</button>
         </div>
 
+        <!-- Tombol ID CARD Baru (Menengah & Membuka di Tab Sama) -->
+        <div class="id-card-container">
+            <a href="https://staff.mediatulisanmanusia.online/?id=20261" class="id-card-badge">
+                <i class="fas fa-id-badge"></i> ID CARD
+            </a>
+        </div>
+
+        <!-- Tombol Media Tulisan Manusia (Terbesar) -->
         <a href="http://mediatulisanmanusia.online/" class="btn-cta" target="_blank">
             <i class="fas fa-rocket"></i> Media Tulisan Manusia
         </a>
@@ -585,10 +492,10 @@
         themeBtn.addEventListener('click', () => {
             if (document.body.getAttribute('data-theme') === 'dark') {
                 document.body.removeAttribute('data-theme');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
             } else {
                 document.body.setAttribute('data-theme', 'dark');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
             }
         });
 
@@ -618,7 +525,6 @@
             if (password === 'satuduatiga') {
                 modal.classList.remove('active');
                 
-                // Membuka PDF menggunakan Google Docs Viewer agar langsung tampil (preview)
                 const absolutePdfUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + targetPdfUrl;
                 const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(absolutePdfUrl)}&embedded=false`;
                 
