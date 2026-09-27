@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags & Social Preview (WhatsApp & Instagram Profile Focus) -->
+    <!-- SEO Meta Tags & Social Preview -->
     <title>Ach. Sufyan Wahyudi, S.Pd., M.Pd., C.Ed. | Pakar Pendidikan & CEO Media Tulisan Manusia</title>
     <meta name="description" content="Profil resmi Ach. Sufyan Wahyudi - Pakar Pendidikan, Penulis Buku, dan Founder & CEO Media Tulisan Manusia. Temukan portofolio, resume, dan tautan profesional di sini.">
     <meta name="keywords" content="Ach. Sufyan Wahyudi, Media Tulisan Manusia, Pakar Pendidikan, Penulis Buku, CEO, S2 Universitas Negeri Malang">
@@ -78,11 +78,14 @@
             animation: gradientBG 15s ease infinite;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--text-main);
+            /* FIX 1: Hapus flexbox di body agar halaman fix dari paling atas */
+            display: block; 
             min-height: 100vh;
-            padding: 50px 20px 140px 20px;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 60px 20px 140px 20px; /* Padding atas ditambahkan agar tidak nempel UI HP */
             overflow-x: hidden;
             position: relative;
+            /* FIX 2: Optimasi render teks agar tidak hilang/glitch */
+            -webkit-font-smoothing: antialiased;
         }
 
         @keyframes gradientBG {
@@ -96,7 +99,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
-            background-size: 25px 25px; /* Jarak antar titik */
+            background-size: 25px 25px; 
             z-index: -3;
             pointer-events: none;
         }
@@ -113,7 +116,7 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px); /* Membuat cahayanya halus menyebar */
+            filter: blur(80px);
             animation: floatOrb 25s infinite alternate ease-in-out;
         }
 
@@ -163,6 +166,7 @@
             border-radius: 50%;
             box-shadow: 0 0 20px var(--accent-glow);
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             animation: floatUpAndWobble linear infinite;
         }
 
@@ -195,11 +199,16 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
             position: relative;
             z-index: 1;
-            /* Memaksa kontainer selalu berada di tengah tanpa memotong bagian atas di HP */
+            /* FIX 1: Margin auto untuk menengahkan tanpa error flexbox */
             margin: 0 auto; 
+            /* FIX 2: Hardware acceleration mencegah teks hilang/glitch saat scroll */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
-        /* --- Header Profil (Foto & Gelembung Nama Terintegrasi) --- */
+        /* --- Header Profil --- */
         .profile-header {
             background: var(--bubble-bg);
             border: 1px solid var(--glass-border);
@@ -211,6 +220,7 @@
             gap: 20px;
             box-shadow: var(--bubble-shadow);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             margin-bottom: 25px;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 100%;
@@ -317,6 +327,8 @@
             position: relative;
             overflow: hidden;
             text-align: center;
+            /* FIX 2 (Lanjutan): Hardware acceleration */
+            will-change: transform;
         }
 
         .glass-card::before {
@@ -366,6 +378,7 @@
             gap: 6px;
             margin-top: auto;
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
@@ -404,6 +417,7 @@
             font-size: 13px;
             font-weight: 600;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             cursor: pointer;
             display: inline-flex;
@@ -456,7 +470,7 @@
         .footer-copyright {
             border-top: 1px solid var(--glass-border);
             padding-top: 20px;
-            font-size: 11px; /* Ukuran diperkecil agar proporsional */
+            font-size: 11px; /* Ukuran proporsional kecil */
             color: var(--text-muted);
             line-height: 1.6;
         }
@@ -478,6 +492,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             display: flex; justify-content: center; align-items: center;
             z-index: 1000; opacity: 0; visibility: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -522,9 +537,16 @@
         .modal-btn:hover { transform: translateY(-2px); }
         .error-msg { color: #ef4444; font-size: 12px; margin-top: 10px; font-weight: 600; display: none; }
 
-        /* --- Social Media & Theme Toggle --- */
+        /* --- FIX 3: Social Media Mengambang di Tengah --- */
         .floating-controls {
-            position: fixed; bottom: 30px; display: flex; gap: 15px; z-index: 100;
+            position: fixed; 
+            bottom: 30px; 
+            left: 0;
+            width: 100%;
+            display: flex; 
+            justify-content: center; /* Memaksa tombol untuk berada di tengah */
+            gap: 15px; 
+            z-index: 100;
         }
 
         .icon-bubble {
@@ -532,7 +554,9 @@
             background: var(--bubble-bg); border: 1px solid var(--glass-border);
             display: flex; justify-content: center; align-items: center;
             text-decoration: none; color: var(--text-main); font-size: 20px;
-            box-shadow: var(--bubble-shadow); backdrop-filter: blur(10px);
+            box-shadow: var(--bubble-shadow); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
         }
@@ -549,7 +573,7 @@
 
         /* --- Responsif untuk HP & Tablet --- */
         @media (max-width: 768px) {
-            body { padding: 30px 15px 120px 15px; }
+            body { padding: 60px 15px 120px 15px; } /* Tambah padding atas ekstra di HP */
             .glass-container { padding: 30px 20px 25px 20px; border-radius: 30px; margin: 0 auto; }
             .profile-header { padding: 25px 15px; border-radius: 20px; }
             .avatar { width: 110px; height: 110px; border-radius: 20px; }
@@ -557,7 +581,7 @@
             .glass-card { border-radius: 20px; padding: 20px 15px; }
             .theme-toggle { top: 15px; right: 15px; width: 45px; height: 45px; font-size: 18px; }
             .icon-bubble { width: 45px; height: 45px; font-size: 18px; }
-            .footer-copyright { font-size: 10px; } /* Copyright lebih kecil lagi khusus di HP */
+            .footer-copyright { font-size: 10px; } 
         }
     </style>
 </head>
@@ -660,7 +684,7 @@
             </div>
             
             <a href="http://mediatulisanmanusia.com/" class="btn-cta" target="_blank">
-                <i class="fas fa-rocket"></i>Media Tulisan Manusia
+                <i class="fas fa-rocket"></i> Media Tulisan Manusia
             </a>
         </div>
 
