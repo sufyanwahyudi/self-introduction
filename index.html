@@ -17,7 +17,6 @@
     <meta property="og:image" content="sufyan.png">
     <meta property="og:url" content="https://sufyanwahyudi.github.io/">
 
-
     <link rel="icon" type="image/png" href="cipta.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,6 +39,10 @@
             --accent-glow: rgba(15, 23, 42, 0.15);
             --btn-text-color: #ffffff;
             --floating-bubble-color: rgba(255, 255, 255, 0.4);
+            /* Warna Cahaya Latar Belakang Terang */
+            --orb-1: rgba(56, 189, 248, 0.25);
+            --orb-2: rgba(167, 139, 250, 0.2);
+            --dot-color: rgba(0, 0, 0, 0.06);
         }
 
         /* TEMA GELAP (Toggled) */
@@ -57,6 +60,10 @@
             --accent-glow: rgba(56, 189, 248, 0.2);
             --btn-text-color: #0f172a;
             --floating-bubble-color: rgba(56, 189, 248, 0.05);
+            /* Warna Cahaya Latar Belakang Gelap */
+            --orb-1: rgba(56, 189, 248, 0.12);
+            --orb-2: rgba(167, 139, 250, 0.08);
+            --dot-color: rgba(255, 255, 255, 0.04);
         }
 
         * {
@@ -73,9 +80,10 @@
             color: var(--text-main);
             display: flex;
             justify-content: center;
-            align-items: center;
+            /* PERBAIKAN BUG SCROLL: Mengubah center menjadi flex-start agar halaman selalu di atas */
+            align-items: flex-start; 
             min-height: 100vh;
-            padding: 40px 20px 140px 20px;
+            padding: 50px 20px 140px 20px; /* Padding atas memastikan jarak dari ujung layar HP */
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-x: hidden;
             position: relative;
@@ -85,6 +93,52 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* --- BACKGROUND: Pola Titik Halus (Dot Pattern) --- */
+        .dot-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+            background-size: 25px 25px; /* Jarak antar titik */
+            z-index: -3;
+            pointer-events: none;
+        }
+
+        /* --- BACKGROUND: Cahaya Abstrak (Glowing Orbs) --- */
+        .orb-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px); /* Membuat cahayanya halus menyebar */
+            animation: floatOrb 25s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: var(--orb-1);
+            top: -100px; left: -100px;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: var(--orb-2);
+            bottom: -150px; right: -100px;
+            animation-delay: -5s;
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.05); }
+            100% { transform: translate(-30px, 60px) scale(0.95); }
         }
 
         /* --- ANIMASI ENTRANCE --- */
@@ -98,7 +152,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ANIMASI GELEMBUNG LATAR BELAKANG --- */
+        /* --- Gelembung Kaca Kecil --- */
         .bubbles-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -145,13 +199,15 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
             position: relative;
             z-index: 1;
+            /* Tambahan margin agar tetap seimbang jika layar sangat besar */
+            margin: auto; 
         }
 
         /* --- Header Profil (Foto & Gelembung Nama Terintegrasi) --- */
         .profile-header {
             background: var(--bubble-bg);
             border: 1px solid var(--glass-border);
-            border-radius: 30px; /* Menyamakan kelengkungan sudut dengan kartu lain */
+            border-radius: 30px;
             padding: 30px;
             display: flex;
             flex-direction: column;
@@ -166,11 +222,10 @@
 
         .profile-header:hover { transform: scale(1.01); }
 
-        /* Foto Profil dengan sudut melengkung selaras */
         .avatar {
             width: 130px;
             height: 130px;
-            border-radius: 25px; /* Mengikuti sudut melengkung kartu */
+            border-radius: 25px;
             object-fit: cover;
             border: 3px solid var(--glass-border);
             box-shadow: 0 10px 25px var(--accent-glow);
@@ -244,7 +299,7 @@
             border-bottom: 2px solid var(--accent-glow);
         }
 
-        /* --- Grid Kartu (Responsif Tablet & HP) --- */
+        /* --- Grid Kartu --- */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -289,7 +344,7 @@
 
         .card-icon {
             width: 55px; height: 55px;
-            border-radius: 20px; /* Sudut melengkung selaras */
+            border-radius: 20px;
             background: var(--bubble-bg);
             display: flex; justify-content: center; align-items: center;
             font-size: 22px; color: var(--accent-color);
@@ -301,7 +356,6 @@
         .glass-card h3 { font-size: 15px; font-weight: 700; color: var(--text-main); }
         .glass-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 5px; }
 
-        /* Tombol Selengkapnya di dalam kartu */
         .card-btn {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -499,8 +553,8 @@
 
         /* --- Responsif untuk HP & Tablet --- */
         @media (max-width: 768px) {
-            body { padding: 20px 15px 120px 15px; }
-            .glass-container { padding: 30px 20px 25px 20px; border-radius: 30px; }
+            body { padding: 30px 15px 120px 15px; } /* Padding atas disesuaikan agar rapi di HP */
+            .glass-container { padding: 30px 20px 25px 20px; border-radius: 30px; margin: 0 auto; }
             .profile-header { padding: 25px 15px; border-radius: 20px; }
             .avatar { width: 110px; height: 110px; border-radius: 20px; }
             .card-grid { grid-template-columns: 1fr; gap: 15px; }
@@ -511,6 +565,13 @@
     </style>
 </head>
 <body>
+
+    <!-- Latar Belakang Baru (Pola Titik & Cahaya Orbs) -->
+    <div class="dot-pattern"></div>
+    <div class="orb-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
 
     <!-- Latar Belakang Gelembung -->
     <div class="bubbles-container">
@@ -525,7 +586,7 @@
 
     <main class="glass-container fade-in-up">
         
-        <!-- Header Profil (Foto & Nama Menyatu dalam Gelembung yang Serasi dengan Sudut Melengkung) -->
+        <!-- Header Profil -->
         <div class="profile-header fade-in-up" style="animation-delay: 0.1s;">
             <img src="sufyan.png" alt="Ach. Sufyan Wahyudi" class="avatar" onerror="this.src='https://ui-avatars.com/api/?name=Sufyan+Wahyudi&background=random&color=fff&size=200'">
             <div class="profile-info">
@@ -549,7 +610,7 @@
 
         <!-- 4 Kotak Kartu -->
         <div class="card-grid fade-in-up" style="animation-delay: 0.5s;">
-            <!-- Kotak 1 (IG Sufyan) -->
+            <!-- Kotak 1 -->
             <div class="glass-card">
                 <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
                 <h3>Akademisi</h3>
@@ -559,7 +620,7 @@
                 </a>
             </div>
             
-            <!-- Kotak 2 (IG Sufyan) -->
+            <!-- Kotak 2 -->
             <div class="glass-card">
                 <div class="card-icon"><i class="fas fa-book-open"></i></div>
                 <h3>Penulis</h3>
@@ -569,7 +630,7 @@
                 </a>
             </div>
 
-            <!-- Kotak 3 (IG Sufyan) -->
+            <!-- Kotak 3 -->
             <div class="glass-card">
                 <div class="card-icon"><i class="fas fa-users"></i></div>
                 <h3>Sosial & Literasi</h3>
@@ -579,7 +640,7 @@
                 </a>
             </div>
 
-            <!-- Kotak 4 (IG Media Tulisan Manusia) -->
+            <!-- Kotak 4 -->
             <div class="glass-card">
                 <div class="card-icon"><i class="fas fa-building"></i></div>
                 <h3>Founder & CEO</h3>
