@@ -78,13 +78,11 @@
             animation: gradientBG 15s ease infinite;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--text-main);
-            /* FIX 1: Hapus flexbox di body agar halaman fix dari paling atas */
             display: block; 
             min-height: 100vh;
-            padding: 60px 20px 140px 20px; /* Padding atas ditambahkan agar tidak nempel UI HP */
+            padding: 60px 20px 140px 20px; 
             overflow-x: hidden;
             position: relative;
-            /* FIX 2: Optimasi render teks agar tidak hilang/glitch */
             -webkit-font-smoothing: antialiased;
         }
 
@@ -199,9 +197,7 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
             position: relative;
             z-index: 1;
-            /* FIX 1: Margin auto untuk menengahkan tanpa error flexbox */
             margin: 0 auto; 
-            /* FIX 2: Hardware acceleration mencegah teks hilang/glitch saat scroll */
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
             backface-visibility: hidden;
@@ -327,8 +323,7 @@
             position: relative;
             overflow: hidden;
             text-align: center;
-            /* FIX 2 (Lanjutan): Hardware acceleration */
-            will-change: transform;
+            /* CATATAN: will-change dihapus agar teks tidak hilang/glitch saat di HP */
         }
 
         .glass-card::before {
@@ -416,8 +411,6 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             cursor: pointer;
             display: inline-flex;
@@ -470,9 +463,10 @@
         .footer-copyright {
             border-top: 1px solid var(--glass-border);
             padding-top: 20px;
-            font-size: 11px; /* Ukuran proporsional kecil */
+            font-size: 11px; 
             color: var(--text-muted);
             line-height: 1.6;
+            margin-bottom: 10px;
         }
 
         .footer-copyright a {
@@ -485,6 +479,55 @@
         .footer-copyright a:hover {
             color: var(--accent-color);
             text-decoration: underline;
+        }
+
+        /* --- Tombol Melayang Berbasis Scroll --- */
+        .floating-controls {
+            position: fixed; 
+            bottom: 30px; 
+            left: 0;
+            width: 100%;
+            display: flex; 
+            justify-content: center; /* Memastikan posisi tepat di tengah layar */
+            gap: 15px; 
+            z-index: 1000;
+            pointer-events: none; /* Cegah klik tidak sengaja di area kosong */
+            
+            /* Status Awal: Tersembunyi */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.4s;
+        }
+
+        /* Kelas Aktif ketika discroll */
+        .floating-controls.scrolled {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .icon-bubble {
+            width: 55px; height: 55px; border-radius: 50%;
+            background: var(--bubble-bg); border: 1px solid var(--glass-border);
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; color: var(--text-main); font-size: 20px;
+            box-shadow: var(--bubble-shadow); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            pointer-events: auto; /* Mengaktifkan kembali fungsi klik untuk ikon */
+        }
+
+        .icon-bubble:hover {
+            transform: translateY(-8px) scale(1.1);
+            background: var(--accent-color); color: var(--btn-text-color);
+            box-shadow: 0 15px 25px var(--accent-glow);
+        }
+
+        .theme-toggle {
+            position: fixed; top: 30px; right: 30px; z-index: 100;
         }
 
         /* --- Modal Kata Sandi --- */
@@ -537,43 +580,9 @@
         .modal-btn:hover { transform: translateY(-2px); }
         .error-msg { color: #ef4444; font-size: 12px; margin-top: 10px; font-weight: 600; display: none; }
 
-        /* --- FIX 3: Social Media Mengambang di Tengah --- */
-        .floating-controls {
-            position: fixed; 
-            bottom: 30px; 
-            left: 0;
-            width: 100%;
-            display: flex; 
-            justify-content: center; /* Memaksa tombol untuk berada di tengah */
-            gap: 15px; 
-            z-index: 100;
-        }
-
-        .icon-bubble {
-            width: 55px; height: 55px; border-radius: 50%;
-            background: var(--bubble-bg); border: 1px solid var(--glass-border);
-            display: flex; justify-content: center; align-items: center;
-            text-decoration: none; color: var(--text-main); font-size: 20px;
-            box-shadow: var(--bubble-shadow); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .icon-bubble:hover {
-            transform: translateY(-8px) scale(1.1);
-            background: var(--accent-color); color: var(--btn-text-color);
-            box-shadow: 0 15px 25px var(--accent-glow);
-        }
-
-        .theme-toggle {
-            position: fixed; top: 30px; right: 30px; z-index: 100;
-        }
-
         /* --- Responsif untuk HP & Tablet --- */
         @media (max-width: 768px) {
-            body { padding: 60px 15px 120px 15px; } /* Tambah padding atas ekstra di HP */
+            body { padding: 30px 15px 120px 15px; } 
             .glass-container { padding: 30px 20px 25px 20px; border-radius: 30px; margin: 0 auto; }
             .profile-header { padding: 25px 15px; border-radius: 20px; }
             .avatar { width: 110px; height: 110px; border-radius: 20px; }
@@ -711,8 +720,8 @@
         </div>
     </div>
 
-    <!-- Media Sosial -->
-    <div class="floating-controls fade-in-up" style="animation-delay: 0.8s;">
+    <!-- Area Tombol Sosmed (Sembunyi dulu, baru muncul saat di-scroll) -->
+    <div class="floating-controls" id="floatingControls">
         <a href="https://instagram.com/sufyanwahyudi" class="icon-bubble" aria-label="Instagram Pribadi" target="_blank">
             <i class="fab fa-instagram"></i>
         </a>
@@ -725,6 +734,16 @@
     </div>
 
     <script>
+        // --- LOGIKA MUNCUL TOMBOL SOSMED SAAT DI SCROLL ---
+        const floatingControls = document.getElementById('floatingControls');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) { // Muncul setelah scroll ke bawah sedikit (80px)
+                floatingControls.classList.add('scrolled');
+            } else {
+                floatingControls.classList.remove('scrolled');
+            }
+        });
+
         // --- LOGIKA TOGGLE TEMA ---
         const themeBtn = document.getElementById('themeBtn');
         const themeIcon = document.getElementById('themeIcon');
